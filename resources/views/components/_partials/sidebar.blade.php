@@ -25,7 +25,7 @@
                         </form>
                     </li>
                     <li>
-                        <a href="https://flowbite-admin-dashboard.vercel.app/"
+                        <a href="{{ route('dashboard') }}" wire:navigate
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -37,6 +37,19 @@
                                     d="M13.5 3c-.169 0-.334.014-.5.025V11h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 13.5 3Z" />
                             </svg>
                             <span class="ml-3" sidebar-toggle-item>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('list-pms') }}" wire:navigate
+                            class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
+                            </svg>
+                            <span class="ml-3" sidebar-toggle-item>Interface</span>
                         </a>
                     </li>
                 </ul>
