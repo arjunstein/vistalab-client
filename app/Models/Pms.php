@@ -20,7 +20,12 @@ class Pms extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = Str::uuid()->toString();
+            $model->id = (string) Str::uuid();
         });
+    }
+
+    public function customer()
+    {
+        return $this->hasMany(Customer::class);
     }
 }
