@@ -82,8 +82,8 @@
                                     class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-gray-300">
                                     {{ $customer->customer_name }}
                                 </th>
-                                <td class="px-4 py-2">{{ $customer->pms->pms_name }}</td>
-                                <td class="px-4 py-2">{{ $customer->os_server }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $customer->pms->pms_name }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $customer->os_server }}</td>
                                 <td class="px-4 py-2">{{ $customer->ip_server }}</td>
                                 <td class="px-4 py-2">{{ $customer->server_type }}</td>
                                 <td class="px-4 py-2">
