@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class EditPms extends Component
 {
-    #[Title('Update Interface')]
+    #[Title('Edit interface')]
 
     public Pms $pms;
     public $pms_name;
@@ -31,7 +31,7 @@ class EditPms extends Component
     public function render()
     {
         return view('livewire.pms.edit-pms', [
-            'title' => 'Update Interface',
+            'title' => 'Edit interface',
         ]);
     }
 
