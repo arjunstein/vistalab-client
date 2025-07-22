@@ -85,7 +85,7 @@
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $customer->pms->pms_name }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $customer->os_server }}</td>
                                 <td class="px-4 py-2">{{ $customer->ip_server }}</td>
-                                <td class="px-4 py-2">{{ $customer->server_type }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $customer->server_type }}</td>
                                 <td class="px-4 py-2">
                                     <div class="flex items-center gap-2">
                                         <!-- Edit Button -->
