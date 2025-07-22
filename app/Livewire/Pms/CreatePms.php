@@ -33,6 +33,7 @@ class CreatePms extends Component
             'description' => $this->description
         ]);
 
+        session()->flash('success', 'Interface added successfully');
         return $this->redirect(route('list-pms'), navigate: true);
     }
 }

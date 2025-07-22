@@ -42,6 +42,7 @@ class EditPms extends Component
             'description' => $this->description
         ]);
 
+        session()->flash('success', 'Interface updated successfully');
         return $this->redirect(route('list-pms'), navigate: true);
     }
 }

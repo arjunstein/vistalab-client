@@ -58,6 +58,7 @@ class EditCustomer extends Component
             ]
         );
 
+        session()->flash('success', 'Customer updated successfully');
         return $this->redirect(route('list-customer'), navigate: true);
     }
 }

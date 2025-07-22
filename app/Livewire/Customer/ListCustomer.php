@@ -36,5 +36,6 @@ class ListCustomer extends Component
     public function deleteCustomer($id)
     {
         $this->customerService->deleteCustomerService($id);
+        $this->dispatch('show-alert', message: 'Customer deleted successfully');
     }
 }
