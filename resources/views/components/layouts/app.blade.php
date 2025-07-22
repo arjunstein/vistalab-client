@@ -8,14 +8,6 @@
     <title>{{ $title ?? 'Page Title' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-                '(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
@@ -39,6 +31,9 @@
 
         </div>
     </div>
+
+    @include('components._partials.scripts')
+    @stack('script')
 
     <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
