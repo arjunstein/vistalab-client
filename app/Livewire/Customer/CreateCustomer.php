@@ -43,6 +43,7 @@ class CreateCustomer extends Component
             'interface_note' => $this->interface_note,
         ]);
 
+        session()->flash('success', 'Customer created successfully');
         return $this->redirect(route('list-customer'), navigate: true);
     }
 }

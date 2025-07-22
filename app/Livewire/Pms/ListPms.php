@@ -38,6 +38,6 @@ class ListPms extends Component
     {
         $this->pmsService->deletePmsService($id);
 
-        // $this->dispatch('alert', type: 'success', message: 'Interface deleted successfully');
+        $this->dispatch('show-alert', message: 'Interface deleted successfully!');
     }
 }
