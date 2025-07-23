@@ -18,4 +18,17 @@
             applyTheme();
         });
     </script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('nav', {
+                currentPath: window.location.pathname
+            });
+
+            // Update path ketika Livewire navigate (tanpa reload)
+            document.addEventListener('livewire:navigated', () => {
+                Alpine.store('nav').currentPath = window.location.pathname;
+            });
+        });
+    </script>
 @endpush
