@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,10 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'username',
         'name',
@@ -53,8 +58,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($model) {
-            $model->incrementing = false;
-            $model->uuid = Str::uuid();
+            $model->id = Str::uuid();
         });
     }
 }
