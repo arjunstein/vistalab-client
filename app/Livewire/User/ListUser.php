@@ -34,16 +34,12 @@ class ListUser extends Component
 
     public function deleteUser($id)
     {
-        try {
-            $deleted = $this->userService->deleteUserService($id);
+        $deleted = $this->userService->deleteUserService($id);
 
-            if ($deleted) {
-                $this->dispatch('show-alert', message: 'User deleted successfully!', type: 'success');
-            } else {
-                $this->dispatch('show-alert', message: 'You cannot delete your own account.', type: 'danger');
-            }
-        } catch (\Throwable $th) {
-            $this->dispatch('show-alert', message: 'User deletion failed!', type: 'danger');
+        if ($deleted) {
+            $this->dispatch('show-alert', message: 'User deleted successfully!', type: 'success');
+        } else {
+            $this->dispatch('show-alert', message: 'You cannot delete your own account.', type: 'danger');
         }
     }
 }
