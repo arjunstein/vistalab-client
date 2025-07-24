@@ -56,7 +56,7 @@
         <form wire:submit.prevent="updatePms">
             <div class="mb-6">
                 <label for="pms_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pms
-                    Name</label>
+                    Name <span class="text-red-500">*</span></label>
                 <input type="text" id="pms_name" wire:model="pms_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter pms name">
@@ -74,10 +74,25 @@
                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                 @enderror
             </div>
-            <button type="submit"
-                class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800 cursor-pointer">
-                Update
-            </button>
+            <div class="flex items-center space-x-4">
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer"
+                    wire:loading.attr="disabled">
+                    <span wire:loading.remove>Update PMS</span>
+                    <span wire:loading>
+                        <svg class="inline w-4 h-4 mr-3 text-white animate-spin" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 3V1m0 18v-2M5.05 5.05L3.64 3.64m12.72 12.72l-1.41-1.41M3 10H1m18 0h-2M5.05 14.95l-1.41 1.41m12.72-12.72l-1.41 1.41" />
+                        </svg>
+                        Updating...
+                    </span>
+                </button>
+                <a href="{{ route('list-pms') }}" wire:navigate
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    Cancel
+                </a>
+            </div>
         </form>
 
     </div>
