@@ -1,5 +1,5 @@
 <div>
-    <button wire:click="logout"
+    <button wire:click="logout" wire:confirm="Are you sure you want to sign out?"
         class="w-full text-left flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
         role="menuitem">
         <svg class="w-4 h-4 mr-2 text-gray-600 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

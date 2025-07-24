@@ -39,8 +39,10 @@ class Login extends Component
 
             $intendedUrl = session()->pull('url.intended', route('dashboard'));
 
+            session()->flash('success', 'Login successfully');
             return $this->redirect($intendedUrl, navigate: true);
         } catch (\Throwable $e) {
+            session()->flash('error', 'Login failed');
             $this->addError('username', $e->getMessage());
         }
     }
