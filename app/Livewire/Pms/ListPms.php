@@ -36,8 +36,12 @@ class ListPms extends Component
 
     public function deletePms($id)
     {
-        $this->pmsService->deletePmsService($id);
+        $deleted = $this->pmsService->deletePmsService($id);
 
-        $this->dispatch('show-alert', message: 'Interface deleted successfully!');
+        if ($deleted) {
+            $this->dispatch('show-alert', message: 'Interface deleted successfully!', type: 'success');
+        } else {
+            $this->dispatch('show-alert', message: "Can't delete interface, because still has related data", type: 'danger');
+        }
     }
 }

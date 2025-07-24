@@ -4,6 +4,7 @@ namespace App\Services\Pms;
 
 use LaravelEasyRepository\ServiceApi;
 use App\Repositories\Pms\PmsRepository;
+use Illuminate\Database\QueryException;
 
 class PmsServiceImplement extends ServiceApi implements PmsService
 {
@@ -69,6 +70,14 @@ class PmsServiceImplement extends ServiceApi implements PmsService
 
     public function deletePmsService(string $id)
     {
-        return $this->mainRepository->deletePms($id);
+        try {
+            return $this->mainRepository->deletePms($id);
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23000' || strpos($e->getMessage(), 'foreign key constraint') !== false) {
+                return false;
+            }
+
+            throw $e;
+        }
     }
 }
