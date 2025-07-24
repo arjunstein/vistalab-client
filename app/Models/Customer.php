@@ -15,6 +15,7 @@ class Customer extends Model
         'customer_name',
         'os_server',
         'ip_server',
+        'megalos',
         'server_type',
         'interface_note',
         'pms_id'
