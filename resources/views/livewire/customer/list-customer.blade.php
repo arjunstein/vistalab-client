@@ -69,6 +69,7 @@
                             <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">Interface</th>
                             <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">OS</th>
                             <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">IP</th>
+                            <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">Megalos</th>
                             <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">Server</th>
                             <th scope="col" class="px-4 py-2 text-gray-600 dark:text-gray-300">Action</th>
                         </tr>
@@ -85,6 +86,7 @@
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $customer->pms->pms_name }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $customer->os_server }}</td>
                                 <td class="px-4 py-2">{{ $customer->ip_server }}</td>
+                                <td class="px-4 py-2">{{ $customer->megalos }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $customer->server_type }}</td>
                                 <td class="px-4 py-2">
                                     <div class="flex items-center gap-2">
@@ -114,7 +116,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center border-b py-4">
+                                <td colspan="8" class="text-center border-b py-4">
                                     No Customer found
                                 </td>
                             </tr>
