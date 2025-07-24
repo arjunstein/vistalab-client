@@ -54,111 +54,128 @@
         </div>
 
         <form wire:submit.prevent="updateCustomer">
-            <!-- Customer Name -->
-            <div class="mb-6">
-                <label for="customer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer
-                    Name <span class="text-red-500">*</span></label>
-                <input type="text" id="customer_name" wire:model="customer_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                @error('customer_name')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
+            <!-- Form Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Customer Name -->
+                <div>
+                    <label for="customer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer
+                        Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="customer_name" wire:model="customer_name"
+                        class="bg-gray-50 border @error('customer_name') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @error('customer_name')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- PMS Selection -->
+                <div>
+                    <label for="pms_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PMS (Property
+                        Management System)
+                        <span class="text-red-500">*</span></label>
+                    <select id="pms_id" wire:model="pms_id"
+                        class="bg-gray-50 border @error('pms_id') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select PMS</option>
+                        @if ($pmsList && count($pmsList) > 0)
+                            @foreach ($pmsList as $pms)
+                                <option value="{{ $pms->id }}">{{ $pms->pms_name }}</option>
+                            @endforeach
+                        @else
+                            <option value="" disabled>No PMS available</option>
+                        @endif
+                    </select>
+                    @error('pms_id')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- OS Server -->
+                <div>
+                    <label for="os_server" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">OS Server
+                        <span class="text-red-500">*</span></label>
+                    <input type="text" id="os_server" wire:model="os_server"
+                        class="bg-gray-50 border @error('os_server') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @error('os_server')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- IP Server -->
+                <div>
+                    <label for="ip_server" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IP Server
+                        <span class="text-red-500">*</span></label>
+                    <input type="text" id="ip_server" wire:model="ip_server"
+                        class="bg-gray-50 border @error('ip_server') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @error('ip_server')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Megalos -->
+                <div>
+                    <label for="megalos" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Megalos
+                        <span class="text-red-500">*</span></label>
+                    <select id="megalos" wire:model="megalos"
+                        class="bg-gray-50 border @error('megalos') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                    @error('megalos')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Server Type -->
+                <div>
+                    <label for="server_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Server
+                        Type <span class="text-red-500">*</span></label>
+                    <select id="server_type" wire:model="server_type"
+                        class="bg-gray-50 border @error('server_type') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Select Server Type</option>
+                        <option value="cloud">Cloud</option>
+                        <option value="on-premise">On-Premise</option>
+                    </select>
+                    @error('server_type')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
-            <!-- PMS Selection -->
-            <div class="mb-6">
-                <label for="pms_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PMS (Property
-                    Management System)
-                    <span class="text-red-500">*</span></label>
-                <select id="pms_id" wire:model="pms_id"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="">Select PMS</option>
-                    @if ($pmsList && count($pmsList) > 0)
-                        @foreach ($pmsList as $pms)
-                            <option value="{{ $pms->id }}">{{ $pms->pms_name }}</option>
-                        @endforeach
-                    @else
-                        <option value="" disabled>No PMS available</option>
-                    @endif
-                </select>
-                @error('pms_id')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
-
-                <!-- PMS Information Display -->
-                @if ($pms_id)
-                    @php
-                        $selectedPms = collect($pmsList)->firstWhere('id', $pms_id);
-                    @endphp
-                    @if ($selectedPms)
-                        <div
-                            class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg dark:bg-blue-900/20 dark:border-blue-800">
-                            <div class="flex items-start">
-                                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-2" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <h4 class="text-sm font-medium text-blue-800 dark:text-blue-300">Selected PMS:
-                                        {{ $selectedPms->pms_name }}</h4>
-                                    @if ($selectedPms->description)
-                                        <p class="text-sm text-blue-700 dark:text-blue-400 mt-1">
-                                            {{ $selectedPms->description }}</p>
-                                    @endif
-                                    <p class="text-xs text-blue-600 dark:text-blue-500 mt-2">This customer will be
-                                        associated with the selected PMS system.</p>
-                                </div>
+            <!-- PMS Information Display (Full Width) -->
+            @if ($pms_id)
+                @php
+                    $selectedPms = collect($pmsList)->firstWhere('id', $pms_id);
+                @endphp
+                @if ($selectedPms)
+                    <div class="mb-6 p-3 bg-blue-50 border border-blue-200 rounded-lg dark:bg-blue-900/20 dark:border-blue-800">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-2" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <div>
+                                <h4 class="text-sm font-medium text-blue-800 dark:text-blue-300">Selected PMS:
+                                    {{ $selectedPms->pms_name }}</h4>
+                                @if ($selectedPms->description)
+                                    <p class="text-sm text-blue-700 dark:text-blue-400 mt-1">
+                                        {{ $selectedPms->description }}</p>
+                                @endif
+                                <p class="text-xs text-blue-600 dark:text-blue-500 mt-2">This customer will be
+                                    associated with the selected PMS system.</p>
                             </div>
                         </div>
-                    @endif
+                    </div>
                 @endif
-            </div>
+            @endif
 
-            <!-- OS Server -->
-            <div class="mb-6">
-                <label for="os_server" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">OS Server
-                    <span class="text-red-500">*</span></label>
-                <input type="text" id="os_server" wire:model="os_server"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                @error('os_server')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- IP Server -->
-            <div class="mb-6">
-                <label for="ip_server" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IP Server
-                    <span class="text-red-500">*</span></label>
-                <input type="text" id="ip_server" wire:model="ip_server"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                @error('ip_server')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Server Type -->
-            <div class="mb-6">
-                <label for="server_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Server
-                    Type <span class="text-red-500">*</span></label>
-                <select id="server_type" wire:model="server_type"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="">Select Server Type</option>
-                    <option value="cloud">Cloud</option>
-                    <option value="on-premise">On-Premise</option>
-                </select>
-                @error('server_type')
-                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Interface Note -->
+            <!-- Interface Note (Full Width) -->
             <div class="mb-6">
                 <label for="interface_note"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interface Note</label>
                 <textarea id="interface_note" wire:model="interface_note" rows="4"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    class="bg-gray-50 border @error('interface_note') border-red-500 dark:border-red-500 @else border-gray-300 @enderror text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
                 @error('interface_note')
                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                 @enderror
@@ -169,7 +186,7 @@
                 <button type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer"
                     wire:loading.attr="disabled">
-                    <span wire:loading.remove>Edit Customer</span>
+                    <span wire:loading.remove">Update Customer</span>
                     <span wire:loading>
                         <svg class="inline w-4 h-4 mr-3 text-white animate-spin" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

@@ -12,7 +12,7 @@ class EditCustomer extends Component
 {
     #[Title('Edit customer')]
 
-    public $customer_name, $os_server, $ip_server, $pms_id, $server_type, $interface_note;
+    public $customer_name, $os_server, $ip_server, $megalos, $pms_id, $server_type, $interface_note;
 
     public Customer $customer;
     protected CustomerService $customerService;
@@ -31,6 +31,7 @@ class EditCustomer extends Component
         $this->customer_name = $customer->customer_name;
         $this->os_server = $customer->os_server;
         $this->ip_server = $customer->ip_server;
+        $this->megalos = $customer->megalos;
         $this->pms_id = $customer->pms_id;
         $this->server_type = $customer->server_type;
         $this->interface_note = $customer->interface_note;
@@ -52,6 +53,7 @@ class EditCustomer extends Component
                 'customer_name' => $this->customer_name,
                 'os_server' => $this->os_server,
                 'ip_server' => $this->ip_server,
+                'megalos' => $this->megalos,
                 'pms_id' => $this->pms_id,
                 'server_type' => $this->server_type,
                 'interface_note' => $this->interface_note,
