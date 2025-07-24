@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Users</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-white">2</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-white">{{ $all_users }}</p>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Interface PMS</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-white">11</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-white">{{ $all_pms }}</p>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Customer</p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-white">872</p>
+                    <p class="text-lg font-semibold text-gray-700 dark:text-white">{{ $all_customers }}</p>
                 </div>
             </div>
         </div>
