@@ -71,6 +71,11 @@ class CustomerServiceImplement extends ServiceApi implements CustomerService
         return $this->mainRepository->getAllCustomerPaginate($perPage);
     }
 
+    public function searchCustomerService($query, ?int $paginate)
+    {
+        return $this->mainRepository->searchCustomer($query, $paginate);
+    }
+
     public function createCustomerService(array $data)
     {
         $this->_validate_data($data);

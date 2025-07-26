@@ -13,24 +13,35 @@ class ListCustomer extends Component
 
     #[Title('List Customer')]
 
-    public $perPage = 10;
+    public $search = '';
+    public $perPage = 20;
 
     protected CustomerService $customerService;
 
     public function boot(CustomerService $customerService)
     {
-        $this->perPage = 10;
+        $this->perPage = 20;
         $this->customerService = $customerService;
     }
 
     public function render()
     {
-        $all_customer = $this->customerService->allCustomer($this->perPage);
+        if ($this->search) {
+            $all_customer = $this->customerService->searchCustomerService($this->search, $this->perPage);
+        } else {
+            $all_customer = $this->customerService->allCustomer($this->perPage);
+        }
 
         return view('livewire.customer.list-customer', [
             'title' => 'List Customer',
             'all_customer' => $all_customer
         ]);
+    }
+
+    public function updatingSearch($search)
+    {
+        $this->search = $search;
+        $this->resetPage();
     }
 
     public function deleteCustomer($id)
