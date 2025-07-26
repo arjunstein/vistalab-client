@@ -74,6 +74,11 @@ class UserServiceImplement extends ServiceApi implements UserService
         return $this->mainRepository->getAllUser($paginate);
     }
 
+    public function searchUserService($query, ?int $paginate)
+    {
+        return $this->mainRepository->searchUser($query, $paginate);
+    }
+
     public function createUserService(array $data)
     {
         $this->_validate_user_data($data);

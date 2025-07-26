@@ -14,6 +14,7 @@ class ListUser extends Component
 
     #[Title('List users')]
     public User $user;
+    public $search = '';
     public $paginate = 10;
 
     protected UserService $userService;
@@ -26,10 +27,27 @@ class ListUser extends Component
 
     public function render()
     {
+        if ($this->search) {
+            $search_users = $this->userService->searchUserService($this->search, $this->paginate);
+        } else {
+            $search_users = $this->userService->getAllUserWithPaginate($this->paginate);
+        }
+
         return view('livewire.user.list-user', [
             'title' => 'List users',
-            'all_users' => $this->userService->getAllUserWithPaginate($this->paginate)
+            'all_users' => $search_users,
+
         ]);
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPaginate()
+    {
+        $this->resetPage();
     }
 
     public function deleteUser($id)

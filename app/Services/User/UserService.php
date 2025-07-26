@@ -10,4 +10,5 @@ interface UserService extends BaseService
     public function createUserService(array $data);
     public function updateUserService(string $id, array $data);
     public function deleteUserService(string $id);
+    public function searchUserService($query, ?int $paginate);
 }
