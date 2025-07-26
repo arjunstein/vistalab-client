@@ -25,6 +25,15 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
         return $this->model->paginate($paginate);
     }
 
+    public function searchUser($query, ?int $paginate)
+    {
+        // search user by name, email, username
+        return $this->model->where('name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%')
+            ->orWhere('username', 'like', '%' . $query . '%')
+            ->paginate($paginate);
+    }
+
     public function createUser(array $data)
     {
         return $this->model->create($data);

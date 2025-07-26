@@ -25,6 +25,14 @@ class PmsRepositoryImplement extends Eloquent implements PmsRepository
         return $this->model->paginate($perPage);
     }
 
+    public function searchPms($query, ?int $paginate)
+    {
+        return $this->model->where('pms_name', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->orderBy('created_at', 'desc')
+            ->paginate($paginate);
+    }
+
     public function createPms(array $data)
     {
         return $this->model->create($data);

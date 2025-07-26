@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ showModal: false, userIdToDelete: null, userNameToDelete: null }">
     <div class="py-2">
         <div class="w-full mb-1">
             <div class="mb-4">
@@ -45,7 +45,7 @@
                 <form class="sm:pr-3">
                     <label for="pms-search" class="sr-only">Search</label>
                     <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-                        <input type="text" name="search" id="pms-search"
+                        <input type="search" wire:model.live="search" id="pms-search" autocomplete="off"
                             class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Search user....">
                     </div>
@@ -85,7 +85,8 @@
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $user->username }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $user->role ?? 'not assign' }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $user->email }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $user->created_at->format('d F Y') }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ $user->created_at->format('d F Y') }}
+                                </td>
                                 <td class="px-4 py-2">
                                     <div class="flex items-center gap-2">
                                         <!-- Edit Button -->
@@ -100,7 +101,8 @@
                                         </a>
 
                                         <!-- Delete Button -->
-                                        <button type="button" wire:click="deleteUser('{{ $user->id }}')"
+                                        <button type="button"
+                                            @click="showModal = true; userIdToDelete = '{{ $user->id }}'; userNameToDelete = '{{ $user->name }}'"
                                             class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 cursor-pointer">
                                             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
@@ -114,8 +116,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center border-b py-4">
-                                    No PMS found
+                                <td colspan="7" class="text-center border-b py-4">
+                                    No user found
                                 </td>
                             </tr>
                         @endforelse
@@ -127,6 +129,40 @@
         <!-- Card Footer -->
         <div class="pt-4 sm:pt-6">
             {{ $all_users->links(data: ['scrollTo' => false]) }}
+        </div>
+        <!-- Delete Confirmation Modal with Flowbite Style -->
+        <div x-show="showModal" x-cloak
+            class="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/50">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button @click="showModal = false" type="button"
+                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h3 class="mb-5 text-base font-normal text-gray-500 dark:text-gray-400">Are you sure you want
+                            to delete user <br> <span class="font-bold" x-text="userNameToDelete"></span>?</h3>
+                        <button @click="$wire.deleteUser(userIdToDelete); showModal = false; userIdToDelete = null"
+                            type="button"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Yes, delete
+                        </button>
+                        <button @click="showModal = false" type="button"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

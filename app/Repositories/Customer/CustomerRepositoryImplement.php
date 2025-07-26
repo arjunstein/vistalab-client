@@ -25,6 +25,18 @@ class CustomerRepositoryImplement extends Eloquent implements CustomerRepository
         return $this->model->with('pms')->paginate($perPage);
     }
 
+    public function searchCustomer($query, ?int $paginate)
+    {
+        return $this->model->with('pms')->where('customer_name', 'like', '%' . $query . '%')
+            ->orWhere('os_server', 'like', '%' . $query . '%')
+            ->orWhere('ip_server', 'like', '%' . $query . '%')
+            ->orWhere('megalos', 'like', '%' . $query . '%')
+            ->orWhereHas('pms', function ($q) use ($query) {
+                $q->where('pms_name', 'like', '%' . $query . '%');
+            })
+            ->paginate($paginate);
+    }
+
     public function createCustomer(array $data)
     {
         return $this->model->create($data);

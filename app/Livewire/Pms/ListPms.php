@@ -14,6 +14,7 @@ class ListPms extends Component
 
     #[Title('List Interface')]
     public Pms $pms;
+    public $search = '';
     public $perPage = 10;
 
     protected PmsService $pmsService;
@@ -26,12 +27,22 @@ class ListPms extends Component
 
     public function render()
     {
-        $all_pms = $this->pmsService->allPms($this->perPage);
+        if ($this->search) {
+            $all_pms = $this->pmsService->searchPmsService($this->search, $this->perPage);
+        } else {
+            $all_pms = $this->pmsService->allPms($this->perPage);
+        }
 
         return view('livewire.pms.list-pms', [
             'title' => 'List Interface',
             'all_pms' => $all_pms
         ]);
+    }
+
+    public function updatingSearch($search)
+    {
+        $this->search = $search;
+        $this->resetPage();
     }
 
     public function deletePms($id)
