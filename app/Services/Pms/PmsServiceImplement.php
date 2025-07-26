@@ -54,6 +54,11 @@ class PmsServiceImplement extends ServiceApi implements PmsService
         return $this->mainRepository->getAllPmsPaginate($perPage);
     }
 
+    public function searchPmsService($query, ?int $paginate)
+    {
+        return $this->mainRepository->searchPms($query, $paginate);
+    }
+
     public function createPmsService(array $data)
     {
         $this->_validate_data_pms($data);
