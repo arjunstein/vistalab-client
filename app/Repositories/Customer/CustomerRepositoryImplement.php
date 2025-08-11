@@ -22,7 +22,7 @@ class CustomerRepositoryImplement extends Eloquent implements CustomerRepository
 
     public function getAllCustomerPaginate(?int $perPage)
     {
-        return $this->model->with('pms')->paginate($perPage);
+        return $this->model->with('pms')->orderBy('created_at', 'desc')->paginate($perPage);
     }
 
     public function searchCustomer($query, ?int $paginate)
@@ -31,9 +31,11 @@ class CustomerRepositoryImplement extends Eloquent implements CustomerRepository
             ->orWhere('os_server', 'like', '%' . $query . '%')
             ->orWhere('ip_server', 'like', '%' . $query . '%')
             ->orWhere('megalos', 'like', '%' . $query . '%')
+            ->orWhere('server_type', 'like', '%' . $query . '%')
             ->orWhereHas('pms', function ($q) use ($query) {
                 $q->where('pms_name', 'like', '%' . $query . '%');
             })
+            ->orderBy('created_at', 'desc')
             ->paginate($paginate);
     }
 
