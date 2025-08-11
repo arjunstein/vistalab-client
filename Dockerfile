@@ -1,25 +1,23 @@
-# Stage 1: Build Vite assets
+# Stage 1: Build frontend (Vite)
 FROM node:18 AS node_builder
 WORKDIR /app
-COPY src/package*.json src/vite.config.js ./
+COPY package*.json ./
 RUN npm ci
-COPY src ./
+COPY . .
 RUN npm run build
 
-# Stage 2: Install composer dependencies
+# Stage 2: Install PHP deps (Composer)
 FROM composer:2 AS composer_builder
 WORKDIR /app
-COPY src/composer.json src/composer.lock ./
+COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-COPY src ./
+COPY . .
 RUN composer dump-autoload --optimize
 
-# Stage 3: Final FrankenPHP image
+# Stage 3: FrankenPHP final image
 FROM dunglas/frankenphp:1.1-php8.2
 
-# Install PHP extensions
-RUN install-php-extensions \
-    pdo_mysql mbstring exif pcntl bcmath gd zip
+RUN install-php-extensions pdo_mysql mbstring exif pcntl bcmath gd zip
 
 WORKDIR /app
 
@@ -28,9 +26,8 @@ COPY --from=node_builder /app/public /app/public
 
 RUN chown -R www-data:www-data /app && chmod -R 755 /app
 
-EXPOSE 80
-
-ENV SERVER_NAME=:80
+EXPOSE 8000
+ENV SERVER_NAME=:8000
 ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 
 CMD ["php", "vendor/bin/frankenphp", "run"]
