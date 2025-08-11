@@ -1,28 +1,32 @@
-version: '3.8'
 services:
   app:
-    build: .
-    image: vistalab-client:latest
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      SERVER_NAME: ":8080"
-      FRANKENPHP_CONFIG: "worker ./public/index.php"
+    build:
+      context: .
+      dockerfile: docker/frankenphp/Dockerfile
+    container_name: vistalab_app
+    ports:
+      - "${DOCKER_APP_PORT}:80"
+    volumes:
+      - ./src:/app
+    env_file:
+      - .env
     depends_on:
       - db
-    ports:
-      - "8080:8080"
 
   db:
     image: mysql:8.0
-    restart: unless-stopped
+    container_name: vistalab_db
+    restart: always
+    ports:
+      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DOCKER_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DOCKER_DB_DATABASE}
+      MYSQL_USER: ${DOCKER_DB_USERNAME}
+      MYSQL_PASSWORD: ${DOCKER_DB_PASSWORD}
     volumes:
-      - dbdata:/var/lib/mysql
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
 volumes:
-  dbdata:
+  db_data:
