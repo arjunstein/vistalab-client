@@ -14,7 +14,7 @@ use App\Livewire\User\ListUser;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/auth/login', Login::class)->name('login')->middleware('guest');
