@@ -5,9 +5,9 @@
         <div class="w-full max-w-md p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
             <a href="#"
                 class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
-                <img src="https://flowbite-admin-dashboard.vercel.app/images/logo.svg" class="mr-4 h-11"
-                    alt="FlowBite Logo">
-                <span>VistaLab</span>
+                <img src="{{ asset('vistalab.png') }}" class="mr-4 h-11"
+                    alt="vistalab Logo">
+                <span>{{ config('app.name') }}</span>
             </a>
 
             <form class="mt-6 space-y-6" wire:submit="login">
