@@ -17,7 +17,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <a href="{{ route('dashboard') }}" class="flex ml-2 md:mr-24">
+                    <a href="{{ route('dashboard') }}" wire:navigate class="flex ml-2 md:mr-24">
                         <img src="{{ asset('vistalab.png') }}" class="h-8 mr-3" alt="Vistalab Logo" />
                         <span
                             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">{{ config('app.name') }}</span>
@@ -78,7 +78,7 @@
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 cursor-pointer"
                                 id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full" src="https://i.pravatar.cc/80" alt="user photo">
+                                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
                             </button>
                         </div>
 
