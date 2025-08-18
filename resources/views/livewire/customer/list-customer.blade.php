@@ -77,7 +77,7 @@
                     <tbody>
                         @forelse ($all_customer as $i=>$customer)
                             <tr
-                                class="bg-white border-none dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                class="bg-white border-none dark:bg-gray-800 dark:border-gray-700">
                                 <td class="px-4 py-2">{{ $i + 1 }}</td>
                                 <th scope="row"
                                     class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-gray-300">
@@ -92,25 +92,23 @@
                                     <div class="flex items-center gap-2">
                                         <!-- Edit Button -->
                                         <a href="{{ route('edit-customer', $customer->id) }}" wire:navigate
-                                            class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 cursor-pointer">
+                                            class="inline-flex items-center gap-1 p-2 text-sm font-medium text-white bg-yellow-500 rounded-sm hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 cursor-pointer">
                                             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M10.779 17.779L4.36 19.918 6.5 13.5m4.279 4.279l8.364-8.643a3.027 3.027 0 00-2.14-5.165 3.03 3.03 0 00-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14l6.213-6.504M12.75 7.04 17 11.28" />
                                             </svg>
-                                            Update
                                         </a>
 
                                         <!-- Delete Button -->
                                         <button
                                             @click="showModal = true; customerIdToDelete = '{{ $customer->id }}'; customerNameToDelete = '{{ $customer->customer_name }}'"
-                                            class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 cursor-pointer">
+                                            class="inline-flex items-center gap-1 p-2 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-700 dark:hover:bg-red-800 dark:focus:ring-red-900 cursor-pointer">
                                             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"
                                                 stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 011 1v3H9V4a1 1 0 011-1ZM6 7h12v13a1 1 0 01-1 1H7a1 1 0 01-1-1V7Z" />
                                             </svg>
-                                            Delete
                                         </button>
                                     </div>
                                 </td>
