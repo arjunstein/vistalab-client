@@ -17,7 +17,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                    <a href="{{ route('dashboard') }}" class="flex ml-2 md:mr-24">
+                    <a href="{{ route('dashboard') }}" wire:navigate class="flex ml-2 md:mr-24">
                         <img src="{{ asset('vistalab.png') }}" class="h-8 mr-3" alt="Vistalab Logo" />
                         <span
                             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">{{ config('app.name') }}</span>
