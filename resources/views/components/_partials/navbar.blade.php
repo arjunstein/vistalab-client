@@ -17,7 +17,7 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex ml-2 md:mr-24">
+                <a href="{{ route('dashboard') }}" class="flex ml-2 md:mr-24">
                     <img src="{{ asset('vistalab.png') }}" class="h-8 mr-3"
                         alt="Vistalab Logo" />
                     <span
